@@ -28,6 +28,10 @@ public class AdminEntity{
     @Column(nullable = false, length = 50)
     private String telefono;
 
+    @Column(nullable = false, length = 100)
+    private String password;
+
+
     @OneToMany(mappedBy = "adminEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<HorarioAdminEntity> horarios = new ArrayList<>();
 
@@ -50,6 +54,12 @@ public class AdminEntity{
     public void setCorreo(String correo) {
         this.correo = correo;
     }
+
+    public void getCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getPassword() { return password; }
 
     public String getNombre() {
         return nombre;

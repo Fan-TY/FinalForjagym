@@ -37,6 +37,8 @@ public class ClienteEntity {
     @Column(length = 50)
     private String contactoEmergencia;
 
+    @Column(nullable = false, length = 100)
+    private String password;
 
     public ClienteEntity() {
     }
@@ -56,6 +58,10 @@ public class ClienteEntity {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
+
+    public String getPassword() { return password; }
+
+    public void setPassword(String password) { this.password = password; }
 
     public String getNombre() {
         return nombre;
@@ -114,4 +120,6 @@ public class ClienteEntity {
     public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+
+
 }
