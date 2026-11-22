@@ -1,6 +1,6 @@
 package com.sp.forjagym.entity.cliente;
 
-import com.sp.forjagym.model.cliente.Estado;
+import com.sp.forjagym.model.cliente.EstadoTarjeta;
 import com.sp.forjagym.model.cliente.TipoTarjeta;
 import jakarta.persistence.*;
 
@@ -22,7 +22,7 @@ public class TarjetaEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    private Estado estado;
+    private EstadoTarjeta estado;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_tarjeta", nullable = false, length = 20)
@@ -58,11 +58,11 @@ public class TarjetaEntity {
         this.numeroEnmascarado = numeroEnmascarado;
     }
 
-    public Estado getEstado() {
+    public EstadoTarjeta getEstado() {
         return estado;
     }
 
-    public void setEstado(Estado estado) {
+    public void setEstado(EstadoTarjeta estado) {
         this.estado = estado;
     }
 
