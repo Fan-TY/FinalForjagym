@@ -1,7 +1,6 @@
 package com.sp.forjagym.entity.compra;
 
 import com.sp.forjagym.entity.cliente.ClienteEntity;
-import com.sp.forjagym.entity.cliente.TarjetaEntity;
 import com.sp.forjagym.model.compra.EstadoCompra;
 import jakarta.persistence.*;
 
@@ -12,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "compras")
-public class Compra{
+public class CompraEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +22,7 @@ public class Compra{
     private ClienteEntity clienteEntity;
 
     @OneToMany(mappedBy = "compra", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<DetalleCompra> detalles = new ArrayList<>();
+    private List<DetalleCompraEntity> detalles = new ArrayList<>();
 
     @Column(nullable = false)
     private LocalDateTime fecha;
@@ -35,7 +34,7 @@ public class Compra{
     @Column(nullable = false, length = 20)
     private EstadoCompra estado;
 
-    public Compra() {
+    public CompraEntity() {
     }
 
 
@@ -56,11 +55,11 @@ public class Compra{
     }
 
 
-    public List<DetalleCompra> getDetalles() {
+    public List<DetalleCompraEntity> getDetalles() {
         return detalles;
     }
 
-    public void setDetalles(List<DetalleCompra> detalles) {
+    public void setDetalles(List<DetalleCompraEntity> detalles) {
         this.detalles = detalles;
     }
 

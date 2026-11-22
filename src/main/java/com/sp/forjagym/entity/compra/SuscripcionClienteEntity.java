@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "suscripcion_cliente")
-public class SuscripcionCliente {
+public class SuscripcionClienteEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +15,7 @@ public class SuscripcionCliente {
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "detalle_compra_id", nullable = false, unique = true)
-    private DetalleCompra detalleCompra;
+    private DetalleCompraEntity detalleCompra;
 
     @Column(name = "fecha_inicio", nullable = false)
     private LocalDate fechaInicio;
@@ -27,7 +27,7 @@ public class SuscripcionCliente {
     @Column(nullable = false, length = 20)
     private EstadoSuscripcion estado;
 
-    public SuscripcionCliente() {
+    public SuscripcionClienteEntity() {
     }
 
     public Long getId() {
@@ -38,11 +38,11 @@ public class SuscripcionCliente {
         this.id = id;
     }
 
-    public DetalleCompra getDetalleCompra() {
+    public DetalleCompraEntity getDetalleCompra() {
         return detalleCompra;
     }
 
-    public void setDetalleCompra(DetalleCompra detalleCompra) {
+    public void setDetalleCompra(DetalleCompraEntity detalleCompra) {
         this.detalleCompra = detalleCompra;
     }
 

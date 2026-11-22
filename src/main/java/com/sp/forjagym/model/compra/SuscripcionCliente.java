@@ -1,10 +1,8 @@
 package com.sp.forjagym.model.compra;
 
-import com.sp.forjagym.entity.compra.DetalleCompra;
-
 import java.time.LocalDate;
 
-public class SuscripcionCliente{
+public class SuscripcionCliente {
     private Long id;
     private DetalleCompra detalleCompra;
     private LocalDate fechaInicio;

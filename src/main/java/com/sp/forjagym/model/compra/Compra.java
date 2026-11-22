@@ -1,6 +1,6 @@
 package com.sp.forjagym.model.compra;
 
-import com.sp.forjagym.entity.compra.DetalleCompra;
+
 import com.sp.forjagym.model.cliente.Cliente;
 
 import java.math.BigDecimal;

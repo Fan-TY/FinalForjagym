@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "detalle_compra")
-public class DetalleCompra {
+public class DetalleCompraEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,7 +15,7 @@ public class DetalleCompra {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "compra_id", nullable = false)
-    private Compra compra;
+    private CompraEntity compra;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "plan_id", nullable = false)
@@ -30,7 +30,7 @@ public class DetalleCompra {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal subtotal;
 
-    public DetalleCompra() {
+    public DetalleCompraEntity() {
     }
 
     public Long getId() {
@@ -41,11 +41,11 @@ public class DetalleCompra {
         this.id = id;
     }
 
-    public Compra getCompra() {
+    public CompraEntity getCompra() {
         return compra;
     }
 
-    public void setCompra(Compra compra) {
+    public void setCompra(CompraEntity compra) {
         this.compra = compra;
     }
 
