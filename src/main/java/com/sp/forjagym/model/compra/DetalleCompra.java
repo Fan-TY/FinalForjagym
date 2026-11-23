@@ -3,6 +3,7 @@ package com.sp.forjagym.model.compra;
 import com.sp.forjagym.model.planes.Plan;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class DetalleCompra{
     private Long id;
@@ -10,13 +11,19 @@ public class DetalleCompra{
     private BigDecimal precioUnitario;
     private int cantidad;
     private BigDecimal subtotal;
+    private LocalDate fechaInicio;
+    private LocalDate fechaFin;
+    private EstadoSuscripcion estado;
 
-    public DetalleCompra(Long id, Plan plan, BigDecimal precioUnitario, int cantidad, BigDecimal subtotal) {
+    public DetalleCompra(Long id, Plan plan, BigDecimal precioUnitario, int cantidad, BigDecimal subtotal, LocalDate fechaInicio, LocalDate fechaFin, EstadoSuscripcion estado) {
         this.id = id;
         this.plan = plan;
         this.precioUnitario = precioUnitario;
         this.cantidad = cantidad;
         this.subtotal = subtotal;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.estado = estado;
     }
 
     public Long getId() {
@@ -37,5 +44,27 @@ public class DetalleCompra{
 
     public BigDecimal getSubtotal() {
         return subtotal;
+    }
+
+    public LocalDate getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public LocalDate getFechaFin() {
+        return fechaFin;
+    }
+
+    public EstadoSuscripcion getEstado() {
+        return estado;
+    }
+
+    public EstadoSuscripcion getEstadoActual() {
+        if (estado == EstadoSuscripcion.CANCELADA) {
+            return EstadoSuscripcion.CANCELADA;
+        }
+        if (fechaFin != null && LocalDate.now().isAfter(fechaFin)) {
+            return EstadoSuscripcion.VENCIDA;
+        }
+        return EstadoSuscripcion.ACTIVA;
     }
 }

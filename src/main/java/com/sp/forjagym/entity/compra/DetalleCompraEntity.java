@@ -1,9 +1,11 @@
 package com.sp.forjagym.entity.compra;
 
 import com.sp.forjagym.entity.planes.PlanEntity;
+import com.sp.forjagym.model.compra.EstadoSuscripcion;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "detalle_compra")
@@ -29,6 +31,16 @@ public class DetalleCompraEntity {
 
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal subtotal;
+
+    @Column(name = "fecha_inicio")
+    private LocalDate fechaInicio;
+
+    @Column(name = "fecha_fin")
+    private LocalDate fechaFin;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private EstadoSuscripcion estado = EstadoSuscripcion.ACTIVA;
 
     public DetalleCompraEntity() {
     }
@@ -79,5 +91,29 @@ public class DetalleCompraEntity {
 
     public void setSubtotal(BigDecimal subtotal) {
         this.subtotal = subtotal;
+    }
+
+    public LocalDate getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(LocalDate fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public LocalDate getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(LocalDate fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public EstadoSuscripcion getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoSuscripcion estado) {
+        this.estado = estado;
     }
 }
