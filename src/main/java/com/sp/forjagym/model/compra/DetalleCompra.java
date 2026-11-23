@@ -5,22 +5,19 @@ import com.sp.forjagym.model.planes.Plan;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class DetalleCompra{
+public class DetalleCompra {
     private Long id;
     private Plan plan;
     private BigDecimal precioUnitario;
-    private int cantidad;
-    private BigDecimal subtotal;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private EstadoSuscripcion estado;
 
-    public DetalleCompra(Long id, Plan plan, BigDecimal precioUnitario, int cantidad, BigDecimal subtotal, LocalDate fechaInicio, LocalDate fechaFin, EstadoSuscripcion estado) {
+    public DetalleCompra(Long id, Plan plan, BigDecimal precioUnitario,
+                         LocalDate fechaInicio, LocalDate fechaFin, EstadoSuscripcion estado) {
         this.id = id;
         this.plan = plan;
         this.precioUnitario = precioUnitario;
-        this.cantidad = cantidad;
-        this.subtotal = subtotal;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.estado = estado;
@@ -36,14 +33,6 @@ public class DetalleCompra{
 
     public BigDecimal getPrecioUnitario() {
         return precioUnitario;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public BigDecimal getSubtotal() {
-        return subtotal;
     }
 
     public LocalDate getFechaInicio() {

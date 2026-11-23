@@ -26,12 +26,6 @@ public class DetalleCompraEntity {
     @Column(name = "precio_unitario", nullable = false, precision = 10, scale = 2)
     private BigDecimal precioUnitario;
 
-    @Column(nullable = false)
-    private int cantidad;
-
-    @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal subtotal;
-
     @Column(name = "fecha_inicio")
     private LocalDate fechaInicio;
 
@@ -75,22 +69,6 @@ public class DetalleCompraEntity {
 
     public void setPrecioUnitario(BigDecimal precioUnitario) {
         this.precioUnitario = precioUnitario;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public BigDecimal getSubtotal() {
-        return subtotal;
-    }
-
-    public void setSubtotal(BigDecimal subtotal) {
-        this.subtotal = subtotal;
     }
 
     public LocalDate getFechaInicio() {

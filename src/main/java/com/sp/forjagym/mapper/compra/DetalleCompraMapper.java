@@ -25,8 +25,6 @@ public class DetalleCompraMapper {
                 entity.getId(),
                 planMapper.toModel(entity.getPlanEntity()),
                 entity.getPrecioUnitario(),
-                entity.getCantidad(),
-                entity.getSubtotal(),
                 entity.getFechaInicio(),
                 entity.getFechaFin(),
                 entity.getEstado()
@@ -46,8 +44,6 @@ public class DetalleCompraMapper {
             entity.setPlanEntity(planReferencia);
         }
         entity.setPrecioUnitario(model.getPrecioUnitario());
-        entity.setCantidad(model.getCantidad());
-        entity.setSubtotal(model.getSubtotal());
         entity.setFechaInicio(model.getFechaInicio());
         entity.setFechaFin(model.getFechaFin());
         entity.setEstado(model.getEstado() != null ? model.getEstado() : EstadoSuscripcion.ACTIVA);
