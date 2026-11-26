@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="pasos(paso)" class="d-flex flex-column gap-4 ms-lg-5">
+  <div class="d-flex gap-3 align-items-center"
+       th:each="titulo, it : ${#strings.arraySplit('Completar datos del usuario;Seleccionar plan;Completar compra;¡Listo! Usuario registrado', ';')}">
+        <span class="badge rounded-circle p-3 fs-6"
+              th:classappend="${it.count <= paso} ? 'text-bg-danger' : 'text-bg-light border border-danger'"
+              th:text="${it.count}">1</span>
+    <span class="fs-5"
+          th:classappend="${it.count == paso} ? 'text-danger fw-bold' : (${it.count < paso} ? 'text-danger' : 'text-secondary')"
+          th:text="${titulo}">Paso</span>
+  </div>
+</div>
+</body>
+</html>
