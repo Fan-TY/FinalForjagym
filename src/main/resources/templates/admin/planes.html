@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon">
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <title>Planes - Administración</title>
+</head>
+<body>
+
+<header class="sticky-top">
+  <div class="bg-body shadow-sm">
+    <div th:replace="~{fragments/fragment_navbar :: navbar}"></div>
+  </div>
+</header>
+
+<main>
+  <div class="container py-4">
+
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <p class="mb-0 fs-2 text-danger fw-bold">PLANES DE ENTRENAMIENTO</p>
+        <p class="text-secondary fs-5 mb-0">Crea y gestiona los planes y sus categorías</p>
+      </div>
+      <a th:href="@{/admin/planes/crear}" class="btn btn-danger">
+        <i class="bi bi-plus-lg me-1"></i> Nuevo plan
+      </a>
+    </div>
+
+    <div class="alert alert-success mt-3" th:if="${exito}" th:text="${exito}"></div>
+    <div class="alert alert-danger mt-3" th:if="${error}" th:text="${error}"></div>
+    
+    <ul class="nav nav-tabs mt-4">
+      <li class="nav-item">
+        <a class="nav-link fw-bold"
+           th:classappend="${vista == 'planes'} ? 'active text-danger' : 'text-secondary'"
+           th:href="@{/admin/planes(vista='planes')}">Planes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link fw-bold"
+           th:classappend="${vista == 'categorias'} ? 'active text-danger' : 'text-secondary'"
+           th:href="@{/admin/planes(vista='categorias')}">Categorías</a>
+      </li>
+    </ul>
+    
+    <div class="card border-0 shadow-sm mt-3" th:if="${vista == 'planes'}">
+      <div class="table-responsive">
+        <table class="table table-striped align-middle mb-0">
+          <thead>
+          <tr>
+            <th scope="col">Plan</th>
+            <th scope="col">Duración</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Beneficios</th>
+            <th scope="col">Categorías</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Acciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:if="${#lists.isEmpty(planes)}">
+            <td colspan="7" class="text-center text-secondary py-4">Aún no hay planes registrados</td>
+          </tr>
+          <tr th:each="p : ${planes}">
+            <td class="fw-bold text-secondary" th:text="${p.nombre}">Fuerza Total</td>
+            <td th:text="${p.duracionDias} + ' días'">30 días</td>
+            <td th:text="|S/ ${#numbers.formatDecimal(p.precio, 1, 'COMMA', 2, 'POINT')}|">S/ 120.00</td>
+            <td th:text="${#lists.size(p.beneficios)}">3</td>
+            <td th:text="${#lists.size(p.categorias)}">2</td>
+            <td>
+              <span class="badge"
+                    th:classappend="${p.estadoPlan.name() == 'activo'} ? 'bg-success' : 'bg-secondary'"
+                    th:text="${p.estadoPlan.name() == 'activo'} ? 'Activo' : 'Inactivo'">Activo</span>
+            </td>
+            <td>
+              <a th:href="@{/admin/planes/{id}/editar(id=${p.id})}" class="nav-link text-secondary p-0">Editar</a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <div class="row g-4 mt-1" th:if="${vista == 'categorias'}">
+      
+      <div class="col-lg-4">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <h5 class="text-danger fw-bold">Nueva categoría</h5>
+            <p class="text-secondary small">Asigna una categoría a un plan existente.</p>
+
+            <div class="alert alert-warning" th:if="${#lists.isEmpty(planes)}">
+              Primero crea un plan para poder agregar categorías.
+            </div>
+
+            <form th:action="@{/admin/planes/categorias/crear}" method="post" th:unless="${#lists.isEmpty(planes)}">
+              <div class="mb-3">
+                <label for="idPlanCategoria" class="form-label">Plan</label>
+                <select id="idPlanCategoria" name="idPlan" class="form-select" required>
+                  <option value="" disabled selected>Selecciona un plan</option>
+                  <option th:each="p : ${planes}" th:value="${p.id}" th:text="${p.nombre}">Plan</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="nombreCategoria" class="form-label">Nombre</label>
+                <input type="text" id="nombreCategoria" name="nombre" class="form-control" maxlength="50" required>
+              </div>
+              <div class="mb-3">
+                <label for="descripcionCategoria" class="form-label">Descripción</label>
+                <input type="text" id="descripcionCategoria" name="descripcion" class="form-control" maxlength="200" required>
+              </div>
+              <button type="submit" class="btn btn-danger w-100">Agregar categoría</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-8">
+        <div class="card border-0 shadow-sm mb-3" th:each="p : ${planes}">
+          <div class="card-header bg-white d-flex justify-content-between align-items-center">
+            <span class="fw-bold text-secondary" th:text="${p.nombre}">Fuerza Total</span>
+            <span class="badge bg-danger-subtle text-danger" th:text="${#lists.size(p.categorias)} + ' categorías'">2 categorías</span>
+          </div>
+          <div class="card-body">
+            <p class="text-secondary mb-0" th:if="${#lists.isEmpty(p.categorias)}">Este plan aún no tiene categorías.</p>
+            <table class="table table-sm mb-0" th:unless="${#lists.isEmpty(p.categorias)}">
+              <thead>
+              <tr>
+                <th scope="col">Categoría</th>
+                <th scope="col">Descripción</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="c : ${p.categorias}">
+                <td class="fw-bold" th:text="${c.nombre}">Categoría</td>
+                <td th:text="${c.descripcion}">Descripción</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<div th:replace="~{fragments/fragment_footer :: footer}"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
