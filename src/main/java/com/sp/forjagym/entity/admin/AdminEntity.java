@@ -1,6 +1,8 @@
 package com.sp.forjagym.entity.admin;
 
+import com.sp.forjagym.model.admin.CorreoAdmin;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,7 @@ public class AdminEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Pattern(regexp = CorreoAdmin.REGEX)
     @Column(nullable = false, length = 50, unique = true)
     private String correo;
 
@@ -55,11 +58,13 @@ public class AdminEntity{
         this.correo = correo;
     }
 
-    public void getCorreo(String correo) {
-        this.correo = correo;
+    public String getPassword() {
+        return password;
     }
 
-    public String getPassword() { return password; }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getNombre() {
         return nombre;

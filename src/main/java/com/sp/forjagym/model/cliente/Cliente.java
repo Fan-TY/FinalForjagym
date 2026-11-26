@@ -13,9 +13,10 @@ public class Cliente {
     private String telefono;
     private LocalDate fechaNacimiento;
     private String contactoEmergencia;
+    private String password;
     private List<Tarjeta> tarjetas = new ArrayList<>();
 
-    public Cliente(Long id, String correo, String nombre, String apellido, String dni, String telefono, LocalDate fechaNacimiento, String contactoEmergencia, List<Tarjeta> tarjetas) {
+    public Cliente(Long id, String correo, String nombre, String apellido, String dni, String telefono, LocalDate fechaNacimiento, String contactoEmergencia, String password, List<Tarjeta> tarjetas) {
         this.id = id;
         this.correo = correo;
         this.nombre = nombre;
@@ -24,6 +25,7 @@ public class Cliente {
         this.telefono = telefono;
         this.fechaNacimiento = fechaNacimiento;
         this.contactoEmergencia = contactoEmergencia;
+        this.password = password;
         this.tarjetas = tarjetas;
     }
 
@@ -57,6 +59,10 @@ public class Cliente {
 
     public String getContactoEmergencia() {
         return contactoEmergencia;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public List<Tarjeta> getTarjetas() {

@@ -25,7 +25,7 @@ public class TarjetaMapper {
                 entity.getNumeroEnmascarado(),
                 entity.getEstado(),
                 entity.getTipoTarjeta(),
-                entity.getFechaExpiracion()
+                entity.getFechaExpiracion() == null ? null : YearMonth.from(entity.getFechaExpiracion())
         );
     }
 
@@ -38,7 +38,7 @@ public class TarjetaMapper {
         entity.setNumeroEnmascarado(model.getNumeroEnmascarado());
         entity.setEstado(model.getEstado());
         entity.setTipoTarjeta(model.getTipoTarjeta());
-        entity.setFechaExpiracion(model.getFechaExpiracion());
+        entity.setFechaExpiracion(model.getFechaExpiracion() == null ? null : model.getFechaExpiracion().atEndOfMonth());
         entity.setClienteEntity(clienteEntity);
         return entity;
     }
@@ -52,7 +52,7 @@ public class TarjetaMapper {
         entity.setNumeroEnmascarado(digitos.substring(digitos.length() - 4));
         entity.setEstado(EstadoTarjeta.activo);
         entity.setTipoTarjeta(tipoTarjeta);
-        entity.setFechaExpiracion(YearMonth.parse(dto.getVencimiento(), FORMATO));
+        entity.setFechaExpiracion(YearMonth.parse(dto.getVencimiento(), FORMATO).atEndOfMonth());
         entity.setClienteEntity(clienteEntity);
         return entity;
     }
