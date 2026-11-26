@@ -19,6 +19,21 @@ public class ClienteMapper {
     }
 
     public Cliente toModel(ClienteEntity entity) {
+        return construir(entity, null);
+    }
+
+    public Cliente toModelParaLogin(ClienteEntity entity) {
+        return construir(entity, entity == null ? null : entity.getPassword());
+    }
+
+    public List<Cliente> toModelList(List<ClienteEntity> entities) {
+        if (entities == null) {
+            return List.of();
+        }
+        return entities.stream().map(this::toModel).toList();
+    }
+
+    private Cliente construir(ClienteEntity entity, String password) {
         if (entity == null) {
             return null;
         }
@@ -34,6 +49,7 @@ public class ClienteMapper {
                 entity.getTelefono(),
                 entity.getFechaNacimiento(),
                 entity.getContactoEmergencia(),
+                password,
                 tarjetas
         );
     }
@@ -51,13 +67,14 @@ public class ClienteMapper {
         entity.setTelefono(model.getTelefono());
         entity.setFechaNacimiento(model.getFechaNacimiento());
         entity.setContactoEmergencia(model.getContactoEmergencia());
+        entity.setPassword(model.getPassword());
         if (model.getTarjetas() != null) {
             model.getTarjetas().forEach(t -> entity.getTarjetas().add(tarjetaMapper.toEntity(t, entity)));
         }
         return entity;
     }
 
-    public ClienteEntity toEntity(RegistroClienteDto dto) {
+    public ClienteEntity toEntity(RegistroClienteDto dto, String passwordHash) {
         if (dto == null) {
             return null;
         }
@@ -69,6 +86,7 @@ public class ClienteMapper {
         entity.setTelefono(dto.getTelefono());
         entity.setFechaNacimiento(dto.getFechaNacimiento());
         entity.setContactoEmergencia(dto.getContactoEmergencia());
+        entity.setPassword(passwordHash);
         return entity;
     }
 

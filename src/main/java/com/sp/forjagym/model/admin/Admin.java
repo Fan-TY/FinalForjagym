@@ -12,9 +12,10 @@ public class Admin {
     private String dni;
     private String telefono;
     private LocalDate fechaNacimiento;
+    private String password;
     private List<HorarioAdmin> horarios = new ArrayList<>();
 
-    public Admin(Long id, String correo, String nombre, String apellido, String dni, String telefono, LocalDate fechaNacimiento, List<HorarioAdmin> horarios) {
+    public Admin(Long id, String correo, String nombre, String apellido, String dni, String telefono, LocalDate fechaNacimiento, String password, List<HorarioAdmin> horarios) {
         this.id = id;
         this.correo = correo;
         this.nombre = nombre;
@@ -22,6 +23,7 @@ public class Admin {
         this.dni = dni;
         this.telefono = telefono;
         this.fechaNacimiento = fechaNacimiento;
+        this.password = password;
         this.horarios = horarios;
     }
 
@@ -51,6 +53,10 @@ public class Admin {
 
     public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public List<HorarioAdmin> getHorarios() {

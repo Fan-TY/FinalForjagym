@@ -4,7 +4,7 @@ import com.sp.forjagym.model.cliente.EstadoTarjeta;
 import com.sp.forjagym.model.cliente.TipoTarjeta;
 import jakarta.persistence.*;
 
-import java.time.YearMonth;
+import java.time.LocalDate;
 
 @Entity
 @Table(name="tarjetas")
@@ -29,7 +29,7 @@ public class TarjetaEntity {
     private TipoTarjeta tipoTarjeta;
 
     @Column(name = "fecha_expiracion", nullable = false)
-    private YearMonth fechaExpiracion;
+    private LocalDate fechaExpiracion;
 
     public TarjetaEntity() {
     }
@@ -74,11 +74,11 @@ public class TarjetaEntity {
         this.tipoTarjeta = tipoTarjeta;
     }
 
-    public YearMonth getFechaExpiracion() {
+    public LocalDate getFechaExpiracion() {
         return fechaExpiracion;
     }
 
-    public void setFechaExpiracion(YearMonth fechaExpiracion) {
+    public void setFechaExpiracion(LocalDate fechaExpiracion) {
         this.fechaExpiracion = fechaExpiracion;
     }
 }
