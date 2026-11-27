@@ -61,7 +61,7 @@ public class HistorialMapper {
                 subtotal,
                 total.subtract(subtotal),
                 total,
-                enmascarar(tarjetaVigente(c))
+                enmascarar(compra.getTarjetaEntity())
         );
     }
 

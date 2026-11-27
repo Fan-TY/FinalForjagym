@@ -4,6 +4,7 @@ import com.sp.forjagym.model.cliente.EstadoTarjeta;
 import com.sp.forjagym.model.cliente.TipoTarjeta;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -13,12 +14,24 @@ public class TarjetaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "cliente_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cliente_id")
     private ClienteEntity clienteEntity;
+
+    @Column(nullable = false, length = 19, unique = true)
+    private String numero;
 
     @Column(name = "numero_enmascarado", nullable = false, length = 4)
     private String numeroEnmascarado;
+
+    @Column(nullable = false, length = 4)
+    private String cvv;
+
+    @Column(length = 100)
+    private String titular;
+
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal saldo;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
@@ -50,12 +63,44 @@ public class TarjetaEntity {
         this.clienteEntity = clienteEntity;
     }
 
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
     public String getNumeroEnmascarado() {
         return numeroEnmascarado;
     }
 
     public void setNumeroEnmascarado(String numeroEnmascarado) {
         this.numeroEnmascarado = numeroEnmascarado;
+    }
+
+    public String getCvv() {
+        return cvv;
+    }
+
+    public void setCvv(String cvv) {
+        this.cvv = cvv;
+    }
+
+    public String getTitular() {
+        return titular;
+    }
+
+    public void setTitular(String titular) {
+        this.titular = titular;
+    }
+
+    public BigDecimal getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(BigDecimal saldo) {
+        this.saldo = saldo;
     }
 
     public EstadoTarjeta getEstado() {

@@ -13,7 +13,7 @@ public class ClienteEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "clienteEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "clienteEntity")
     private List<TarjetaEntity> tarjetas = new ArrayList<>();
 
     @Column(nullable = false, length = 50, unique = true)
