@@ -117,4 +117,15 @@ public class PlanMapper {
                 .filter(linea -> !linea.isEmpty())
                 .toList();
     }
+    public List<Plan> toModelList(List<PlanEntity> entities) {
+        if (entities == null) return List.of();
+        return entities.stream().map(this::toModel).toList();
+    }
+
+    public void reemplazarBeneficios(PlanEntity entity, List<Beneficio> beneficios) {
+        entity.getBeneficios().clear();
+        if (beneficios != null) {
+            beneficios.forEach(b -> entity.getBeneficios().add(beneficioMapper.toEntity(b, entity)));
+        }
+    }
 }

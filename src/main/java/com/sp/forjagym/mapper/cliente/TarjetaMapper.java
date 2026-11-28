@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Objects;
 
 @Component
 public class TarjetaMapper {
@@ -55,5 +57,13 @@ public class TarjetaMapper {
         entity.setFechaExpiracion(YearMonth.parse(dto.getVencimiento(), FORMATO).atEndOfMonth());
         entity.setClienteEntity(clienteEntity);
         return entity;
+    }
+
+    public List<Tarjeta> toModelList(List<TarjetaEntity> entities) {
+        if (entities == null) return List.of();
+        return entities.stream()
+                .filter(Objects::nonNull)
+                .map(this::toModel)
+                .toList();
     }
 }

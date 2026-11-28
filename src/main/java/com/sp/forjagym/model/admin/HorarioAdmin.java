@@ -19,6 +19,10 @@ public class HorarioAdmin {
         this.horaFin = horaFin;
         this.admin = admin;
     }
+    public boolean estaDisponible(DayOfWeek dia, LocalTime hora) {
+        return this.diaSemana == dia && !hora.isBefore(horaInicio) &&
+                hora.isBefore(horaFin);
+    }
 
     public Long getId() { return id; }
 

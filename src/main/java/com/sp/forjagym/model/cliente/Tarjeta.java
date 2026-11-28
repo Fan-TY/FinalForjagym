@@ -24,6 +24,9 @@ public class Tarjeta {
     public String getNumeroEnmascarado() {
         return numeroEnmascarado;
     }
+    public void setNumeroEnmascarado(String numeroEnmascarado) {
+        this.numeroEnmascarado = numeroEnmascarado;
+    }
 
     public EstadoTarjeta getEstado() {
         return estado;

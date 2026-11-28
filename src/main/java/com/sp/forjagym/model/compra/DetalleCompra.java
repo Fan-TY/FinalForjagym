@@ -23,6 +23,22 @@ public class DetalleCompra {
         this.estado = estado;
     }
 
+    public static DetalleCompra emitir(Plan plan, LocalDate fechaInicio) {
+        if (plan == null) {
+            throw new IllegalArgumentException("El detalle necesita un plan");
+        }
+        if (fechaInicio == null) {
+            fechaInicio = LocalDate.now();
+        }
+        return new DetalleCompra(
+                null,
+                plan,
+                plan.getPrecio(),
+                fechaInicio,
+                fechaInicio.plusMonths(plan.getDuracionDias()),
+                EstadoSuscripcion.ACTIVA
+        );
+    }
     public Long getId() {
         return id;
     }

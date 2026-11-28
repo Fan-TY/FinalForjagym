@@ -8,6 +8,8 @@ import com.sp.forjagym.model.compra.DetalleCompra;
 import com.sp.forjagym.model.compra.EstadoSuscripcion;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class DetalleCompraMapper {
 
@@ -48,5 +50,10 @@ public class DetalleCompraMapper {
         entity.setFechaFin(model.getFechaFin());
         entity.setEstado(model.getEstado() != null ? model.getEstado() : EstadoSuscripcion.ACTIVA);
         return entity;
+    }
+
+    public List<DetalleCompra> toModelList(List<DetalleCompraEntity> entities) {
+        if (entities == null) return List.of();
+        return entities.stream().map(this::toModel).toList();
     }
 }

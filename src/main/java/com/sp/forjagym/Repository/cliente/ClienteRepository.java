@@ -1,6 +1,5 @@
 package com.sp.forjagym.Repository.cliente;
 
-
 import com.sp.forjagym.entity.cliente.ClienteEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 

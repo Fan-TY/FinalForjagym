@@ -9,5 +9,7 @@ import java.util.Optional;
 
 public interface TarjetaRepository extends JpaRepository<TarjetaEntity, Long> {
     List<TarjetaEntity> findByClienteEntity_IdAndEstado(Long idCliente, EstadoTarjeta estado);
-    Optional<TarjetaEntity> findByIdAndClienteEntity_Id(Long id, Long idCliente);
+    Optional<TarjetaEntity> findByNumero(String numero);
+    Optional<TarjetaEntity> findByIdAndClienteEntity_Id(Long id);
+    List<TarjetaEntity> findByClienteEntityIdAndNumeroEnmascarado(Long idCliente, String numeroEnmascarado);
 }

@@ -4,7 +4,10 @@ import com.sp.forjagym.model.admin.Admin;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Plan {
     private Long id;
@@ -27,6 +30,9 @@ public class Plan {
         this.estadoPlan = estadoPlan;
     }
 
+    public Plan() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -43,6 +49,10 @@ public class Plan {
         return beneficios;
     }
 
+    public void setBeneficios(List<Beneficio> beneficios) {
+        this.beneficios = beneficios;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -57,5 +67,18 @@ public class Plan {
 
     public EstadoPlan getEstadoPlan() {
         return estadoPlan;
+    }
+
+    public static List<Beneficio> limpiarBeneficios(List<Beneficio> lista) {
+        if (lista == null) return new ArrayList<>();
+        return lista.stream()
+                .filter(Objects::nonNull)
+                .map(Beneficio::getDescripcion)
+                .filter(Objects::nonNull)
+                .map(d -> d.replaceFirst("^\\s*[-*•✓✔]+\\s*", "").trim())
+                .filter(d -> !d.isEmpty())
+                .distinct()
+                .map(d -> new Beneficio(null, d))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }

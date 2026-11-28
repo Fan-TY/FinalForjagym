@@ -4,6 +4,7 @@ import com.sp.forjagym.model.cliente.EstadoTarjeta;
 import com.sp.forjagym.model.cliente.TipoTarjeta;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -13,8 +14,8 @@ public class TarjetaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "cliente_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cliente_id")
     private ClienteEntity clienteEntity;
 
     @Column(name = "numero_enmascarado", nullable = false, length = 4)
@@ -30,6 +31,9 @@ public class TarjetaEntity {
 
     @Column(name = "fecha_expiracion", nullable = false)
     private LocalDate fechaExpiracion;
+
+    @Column(nullable = false)
+    private BigDecimal saldo;
 
     public TarjetaEntity() {
     }
@@ -81,4 +85,8 @@ public class TarjetaEntity {
     public void setFechaExpiracion(LocalDate fechaExpiracion) {
         this.fechaExpiracion = fechaExpiracion;
     }
+
+    public BigDecimal getSaldo() { return saldo; }
+
+    public void setSaldo(BigDecimal saldo) { this.saldo = saldo; }
 }

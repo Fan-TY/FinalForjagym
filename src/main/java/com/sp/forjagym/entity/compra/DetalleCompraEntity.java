@@ -2,6 +2,7 @@ package com.sp.forjagym.entity.compra;
 
 import com.sp.forjagym.entity.planes.PlanEntity;
 import com.sp.forjagym.model.compra.EstadoSuscripcion;
+import com.sp.forjagym.model.planes.EstadoPlan;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;

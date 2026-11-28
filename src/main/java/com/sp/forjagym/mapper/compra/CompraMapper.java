@@ -52,4 +52,9 @@ public class CompraMapper {
         }
         return entity;
     }
+
+    public List<Compra> toModelList(List<CompraEntity> entities) {
+        if (entities == null) return List.of();
+        return entities.stream().map(this::toModel).toList();
+    }
 }
