@@ -34,7 +34,10 @@ public class DatosDePrueba {
     }
 
     public static Tarjeta tarjeta() {
-        return new Tarjeta(1L, "1111", EstadoTarjeta.activo, TipoTarjeta.VISA, YearMonth.of(2028, 12));
+        return new Tarjeta(1L,1L,"1111","Carla Vega",
+                new BigDecimal("80.00"), EstadoTarjeta.disponible, TipoTarjeta.VISA,
+                YearMonth.of(2028, 12)
+        );
     }
 
     public static Cliente cliente() {
@@ -49,8 +52,10 @@ public class DatosDePrueba {
     }
 
     public static Compra compra() {
-        return new Compra(1L, cliente(), new ArrayList<>(List.of(detalle())),
-                LocalDateTime.now(), new BigDecimal("80.00"), EstadoCompra.PAGADA);
+        return new Compra(1L, cliente(), tarjeta(),
+                new ArrayList<>(List.of(detalle())), LocalDateTime.now(),
+                new BigDecimal("80.00"), EstadoCompra.PAGADA
+        );
     }
 
     public static Admin admin() {
