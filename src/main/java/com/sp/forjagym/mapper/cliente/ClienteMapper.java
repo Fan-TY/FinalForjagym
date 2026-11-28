@@ -68,9 +68,6 @@ public class ClienteMapper {
         entity.setFechaNacimiento(model.getFechaNacimiento());
         entity.setContactoEmergencia(model.getContactoEmergencia());
         entity.setPassword(model.getPassword());
-        if (model.getTarjetas() != null) {
-            model.getTarjetas().forEach(t -> entity.getTarjetas().add(tarjetaMapper.toEntity(t, entity)));
-        }
         return entity;
     }
 

@@ -18,8 +18,20 @@ public class TarjetaEntity {
     @JoinColumn(name = "cliente_id")
     private ClienteEntity clienteEntity;
 
+    @Column(nullable = false, length = 19, unique = true)
+    private String numero;
+
     @Column(name = "numero_enmascarado", nullable = false, length = 4)
     private String numeroEnmascarado;
+
+    @Column(nullable = false, length = 4)
+    private String cvv;
+
+    @Column(length = 100)
+    private String titular;
+
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal saldo;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
@@ -31,9 +43,6 @@ public class TarjetaEntity {
 
     @Column(name = "fecha_expiracion", nullable = false)
     private LocalDate fechaExpiracion;
-
-    @Column(nullable = false)
-    private BigDecimal saldo;
 
     public TarjetaEntity() {
     }
@@ -54,12 +63,36 @@ public class TarjetaEntity {
         this.clienteEntity = clienteEntity;
     }
 
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
     public String getNumeroEnmascarado() {
         return numeroEnmascarado;
     }
 
     public void setNumeroEnmascarado(String numeroEnmascarado) {
         this.numeroEnmascarado = numeroEnmascarado;
+    }
+
+    public String getCvv() {
+        return cvv;
+    }
+
+    public void setCvv(String cvv) {
+        this.cvv = cvv;
+    }
+
+    public String getTitular() {
+        return titular;
+    }
+
+    public void setTitular(String titular) {
+        this.titular = titular;
     }
 
     public EstadoTarjeta getEstado() {

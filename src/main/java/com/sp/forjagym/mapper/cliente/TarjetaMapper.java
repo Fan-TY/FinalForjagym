@@ -24,7 +24,10 @@ public class TarjetaMapper {
         }
         return new Tarjeta(
                 entity.getId(),
+                entity.getClienteEntity() == null ? null : entity.getClienteEntity().getId(),
                 entity.getNumeroEnmascarado(),
+                entity.getTitular(),
+                entity.getSaldo(),
                 entity.getEstado(),
                 entity.getTipoTarjeta(),
                 entity.getFechaExpiracion() == null ? null : YearMonth.from(entity.getFechaExpiracion())
@@ -37,7 +40,7 @@ public class TarjetaMapper {
         }
         TarjetaEntity entity = new TarjetaEntity();
         entity.setId(model.getId());
-        entity.setNumeroEnmascarado(model.getNumeroEnmascarado());
+        entity.setNumeroEnmascarado(model.getNumeroVisible());
         entity.setEstado(model.getEstado());
         entity.setTipoTarjeta(model.getTipoTarjeta());
         entity.setFechaExpiracion(model.getFechaExpiracion() == null ? null : model.getFechaExpiracion().atEndOfMonth());
