@@ -1,6 +1,7 @@
 package com.sp.forjagym.entity.compra;
 
 import com.sp.forjagym.entity.cliente.ClienteEntity;
+import com.sp.forjagym.entity.cliente.TarjetaEntity;
 import com.sp.forjagym.model.compra.EstadoCompra;
 import jakarta.persistence.*;
 
@@ -20,6 +21,10 @@ public class CompraEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cliente_id", nullable = false)
     private ClienteEntity clienteEntity;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "tarjeta_id", nullable = false)
+    private TarjetaEntity tarjetaEntity;
 
     @OneToMany(mappedBy = "compra", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DetalleCompraEntity> detalles = new ArrayList<>();
@@ -52,6 +57,14 @@ public class CompraEntity {
 
     public void setClienteEntity(ClienteEntity clienteEntity) {
         this.clienteEntity = clienteEntity;
+    }
+
+    public TarjetaEntity getTarjetaEntity() {
+        return tarjetaEntity;
+    }
+
+    public void setTarjetaEntity(TarjetaEntity tarjetaEntity) {
+        this.tarjetaEntity = tarjetaEntity;
     }
 
 
